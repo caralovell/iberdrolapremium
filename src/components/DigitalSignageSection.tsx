@@ -1,0 +1,188 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
+import cmsDashboard from "@/assets/dashboard-mockup.png";
+import player from "@/assets/android-media-player.jpg";
+import epaperDisplay from "@/assets/pantallaelect.png";
+import totemMain from "@/assets/0ib.png";
+import totem1 from "@/assets/1ib.png";
+import totem2 from "@/assets/2ib.png";
+import totem3 from "@/assets/3ib.png";
+import totem4 from "@/assets/4ib.png";
+import portrait from "@/assets/ibportrait.png";
+
+const totemSecondary = [
+  { src: totem1, alt: "Tótem digital" },
+  { src: totem2, alt: "Tótem digital" },
+  { src: totem3, alt: "Tótem digital" },
+  { src: totem4, alt: "Tótem digital" },
+];
+
+const bubbles = ["Contratación autónoma", "Activación mediante NFC", "Fidelización Carrefour", "Asistencia inteligente"];
+const epaperBubbles = ["Etiquetas de precio", "Promociones", "Información de producto"];
+
+const DigitalSignageSection = () => {
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
+
+  return (
+    <section id="digital-signage" className="py-12 md:py-16 bg-background">
+      <div className="container mx-auto px-4">
+        <ScrollReveal>
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="inline-block text-xs uppercase tracking-[0.3em] text-accent font-primary font-bold mb-4">
+              01
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground">Digital Signage</h2>
+          </div>
+        </ScrollReveal>
+
+        {/* Intro block */}
+        <ScrollReveal delay={0.1}>
+          <div className="max-w-4xl mx-auto text-center mb-10">
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+              Soluciones adaptadas a cada formato Carrefour.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-2.5 mt-6">
+              {bubbles.map((label, i) => (
+                <motion.span
+                  key={label}
+                  initial={{ opacity: 0, scale: 0.6, y: 10 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: i * 0.06, type: "spring", stiffness: 200, damping: 14 }}
+                  whileHover={{ scale: 1.08, y: -3 }}
+                  className="inline-flex items-center px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-sm font-medium text-foreground hover:bg-accent/20 hover:border-accent/60 transition-colors cursor-default shadow-sm"
+                >
+                  {label}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Hero image + 4 secondary grid */}
+        <ScrollReveal delay={0.15}>
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-5 mb-20 max-w-4xl mx-auto">
+            <motion.div
+              onClick={() =>
+                setSelectedImage({
+                  src: totemMain,
+                  alt: "Tótem digital interactivo principal con anuncio",
+                })
+              }
+              className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] lg:aspect-auto lg:h-full min-h-[320px] cursor-pointer"
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img
+                src={totemMain}
+                alt="Tótem digital interactivo principal con anuncio"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                width={1024}
+                height={1280}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            </motion.div>
+
+            <div className="grid grid-cols-2 gap-3 lg:gap-4">
+              {totemSecondary.map((t, i) => (
+                <motion.div
+                  key={i}
+                  onClick={() => setSelectedImage(t)}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: i * 0.08, duration: 0.4 }}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className="relative rounded-xl overflow-hidden shadow-lg border border-border group cursor-pointer aspect-[4/5]"
+                >
+                  <img
+                    src={t.src}
+                    alt={t.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    width={896}
+                    height={1152}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+{/* Table tablets section */}
+<ScrollReveal delay={0.2}>
+  <div className="max-w-4xl mx-auto mb-16">
+    <div className="grid md:grid-cols-2 gap-8 items-center rounded-3xl bg-muted/40 border border-border p-6 md:p-8 shadow-sm">
+      <div>
+        <span className="inline-block text-xs uppercase tracking-[0.25em] text-accent font-primary font-bold mb-3">
+          Portrait tablet
+        </span>
+
+        <p className="text-muted-foreground leading-relaxed">
+          Además de los tótems digitales, contamos con tablets de sobremesa pensadas para
+          espacios más cercanos al cliente, ideales para colocar sobre mesas, mostradores o
+          puntos de atención.
+        </p>
+      </div>
+
+      <motion.div
+  className="relative rounded-2xl overflow-hidden shadow-xl border border-border bg-background max-w-[260px] mx-auto"
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.3 }}
+      >
+        <img
+          src={portrait}
+          alt="Tablet de sobremesa para zonas de mesa"
+          className="w-full h-full object-cover"
+          loading="lazy"
+          width={1024}
+          height={1024}
+        />
+      </motion.div>
+    </div>
+  </div>
+</ScrollReveal>
+        
+      </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-5 right-5 z-50 w-10 h-10 rounded-full bg-white text-black text-2xl font-bold flex items-center justify-center hover:bg-accent transition-colors"
+              aria-label="Cerrar imagen"
+            >
+              ×
+            </button>
+
+            <motion.img
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              className="max-w-full max-h-[90vh] object-contain rounded-2xl shadow-2xl"
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
+
+export default DigitalSignageSection;
